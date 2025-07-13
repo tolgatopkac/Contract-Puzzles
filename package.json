@@ -1,12 +1,24 @@
 {
   "name": "puzzles-v2",
   "version": "1.0.0",
-  "description": "",
+  "description": "Smart contract puzzles for learning Solidity",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx hardhat test",
+    "test:game1": "npx hardhat test test/game1Test.js",
+    "test:game2": "npx hardhat test test/game2Test.js",
+    "test:game3": "npx hardhat test test/game3Test.js",
+    "test:game4": "npx hardhat test test/game4Test.js",
+    "test:game5": "npx hardhat test test/game5Test.js",
+    "compile": "npx hardhat compile"
   },
-  "keywords": [],
+  "keywords": [
+    "solidity",
+    "smart-contracts",
+    "puzzles",
+    "ethereum",
+    "hardhat"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {

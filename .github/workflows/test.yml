@@ -1,0 +1,52 @@
+name: 🧪 Smart Contract Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧪 Run tests
+        run: npm run test
+
+      - name: 📊 Run individual game tests
+        run: |
+          echo "🎮 Testing Game 1..."
+          npx hardhat test test/game1Test.js
+          echo "🎮 Testing Game 2..."
+          npx hardhat test test/game2Test.js
+          echo "🎮 Testing Game 3..."
+          npx hardhat test test/game3Test.js
+          echo "🎮 Testing Game 4..."
+          npx hardhat test test/game4Test.js
+          echo "🎮 Testing Game 5..."
+          npx hardhat test test/game5Test.js
+
+      - name: 🔍 Compile contracts
+        run: npx hardhat compile
+
+      - name: 📋 Test results summary
+        run: |
+          echo "✅ All tests completed successfully!"
+          echo "🎯 All 5 puzzles solved!"
