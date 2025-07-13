@@ -24,24 +24,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
 
-      - name: 📦 Install dependencies
-        run: npm ci
-
-      - name: 🧪 Run tests
-        run: npm run test
-
-      - name: 📊 Run individual game tests
+      - name: 📦 Clean install dependencies
         run: |
-          echo "🎮 Testing Game 1..."
-          npx hardhat test test/game1Test.js
-          echo "🎮 Testing Game 2..."
-          npx hardhat test test/game2Test.js
-          echo "🎮 Testing Game 3..."
-          npx hardhat test test/game3Test.js
-          echo "🎮 Testing Game 4..."
-          npx hardhat test test/game4Test.js
-          echo "🎮 Testing Game 5..."
-          npx hardhat test test/game5Test.js
+          rm -rf node_modules package-lock.json
+          npm install --legacy-peer-deps
+
+      - name: 🧪 Run all tests
+        run: npx hardhat test
 
       - name: 🔍 Compile contracts
         run: npx hardhat compile
